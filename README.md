@@ -1,7 +1,7 @@
 # Geo Backend — Django + GeoDjango
 
 Backend-приложение на Django для работы с географическими точками и сообщениями пользователей.  
-Предоставляет REST API для создания точек, обмена сообщениями и поиска контента в заданном радиусе от координат.
+Предоставляет REST API для создания точек, сообщений и поиска контента в заданном радиусе от координат.
 
 ---
 
@@ -10,10 +10,7 @@ Backend-приложение на Django для работы с географи
 - Создание гео-точек на карте  
 - Создание сообщений, привязанных к точкам  
 - Поиск точек в заданном радиусе  
-- Поиск сообщений в заданном радиусе 
-- Авторизация для всех эндпоинтов  
-- Использование GeoDjango + PostGIS  
-- Покрытие тестами (pytest)
+- Поиск сообщений в заданном радиусе
 
 ---
 
@@ -30,14 +27,14 @@ Backend-приложение на Django для работы с географи
 
 ## Установка и запуск
 
-### 1. Клонирование проекта
+#### 1. Клонирование проекта
 
 ```bash
 git clone https://github.com/phentalex/geo_backend
 cd geo_backend
 ```
 
-### 2. Создание виртуального окружения
+#### 2. Создание виртуального окружения
 
 ```bash
 python -m venv venv
@@ -53,7 +50,7 @@ source venv/bin/activate
 source venv/Scripts/activate
 ```
 
-### 3. Установка зависимостей
+#### 3. Установка зависимостей
 
 ```bash
 pip install -r requirements.txt
@@ -63,28 +60,21 @@ pip install -r requirements.txt
 
 ## Настройка базы данных (PostgreSQL + PostGIS)
 
-### 1. Установить PostgreSQL
-### 2. Установить расширение PostGIS
-### 3. Установить GDAL и GEOS (обязательно для GeoDjango)
-*Windows*
+#### 1. Установить PostgreSQL
+#### 2. Установить расширение PostGIS
+#### 3. Установить GDAL и GEOS (обязательно для GeoDjango)
+**Windows**
 1. Скачать установщик:
   *https://trac.osgeo.org/osgeo4w/*
-
 2. Запустить osgeo4w-setup-x86_64.exe
-
 3. В режиме установки выбрать:
-
   - Advanced Install
-
   - Раздел Libs
-
     - `gdal`
-
     - `geos`
-
 4. Дождаться окончания установки
 
-*для Linux / macOS*
+**для Linux / macOS**
 ```bash
 sudo apt install gdal-bin libgdal-dev libgeos-dev
 ```
@@ -99,19 +89,19 @@ brew install gdal geos
 C:\Users\<USER>\AppData\Local\Programs\OSGeo4W\bin\
 ```
 
-### 3. Создать базу данных:
+#### 4. Создать базу данных:
 
 ```bash
 CREATE DATABASE geo_points_db;
 ```
 
-### 4. Включить PostGIS:
+#### 5. Включить PostGIS:
 
 ```bash
 CREATE EXTENSION postgis;
 ```
 
-### 5. Создать .env
+#### 6. Создать .env
 
 Пример:
 ```bash
@@ -140,7 +130,9 @@ python manage.py migrate
 python manage.py runserver
 ```
 ### После запуска сервер будет доступен по адресу:
-**http://127.0.0.1:8000/**
+```bash
+http://127.0.0.1:8000/
+```
 
 ---
 
@@ -148,8 +140,8 @@ python manage.py runserver
 
 ### Все API-эндпоинты требуют авторизации.
 
-### Для тестирования можно:
-- создать супер пользователя и зайти под ним в /admin/
+#### Для тестирования можно:
+- создать супер пользователя и авторизоваться в /admin/ или Basic Auth(Postman)
   ```bash
   python manage.py createsuperuser
   ```
@@ -160,7 +152,7 @@ python manage.py runserver
 ## API эндпоинты
 ### Создание географической точки
 
-POST **/api/points/**
+POST `/api/points/`
 
 Тело запроса:
 ```json
@@ -182,7 +174,7 @@ POST **/api/points/**
 
 ### Поиск точек в радиусе
 
-GET **/api/points/search/**
+GET `/api/points/search/`
 
 Query-параметры:
 - longitude — долгота
@@ -196,7 +188,7 @@ Query-параметры:
 
 ### Создание сообщений к точке
 
-POST **/api/points/messages/**
+POST `/api/points/messages/`
 
 Тело запроса:
 ```json
@@ -218,7 +210,7 @@ POST **/api/points/messages/**
 
 ### Поиск сообщений в радиусе
 
-GET **/api/points/messages/search/**
+GET `/api/points/messages/search/`
 
 Query-параметры:
 - longitude — долгота
@@ -235,7 +227,7 @@ Query-параметры:
 
 ## Тестирование
 
-В проекте используется **pytest**
+В проекте используется `pytest`
 
 Запуск тестов:
 ```bash
@@ -243,8 +235,8 @@ pytest
 ```
 Особенности:
 - Тесты моделей и API
-- фикстуры через **conftest.py**
-- фабрики **make_point**, **make_message**
+- фикстуры через `conftest.py`
+- фабрики `make_point`, `make_message`
 
 ---
 
@@ -253,11 +245,10 @@ pytest
 - SRID 4326 (WGS84) — стандарт GPS-координат
 - BaseCreateView / BaseSearchView — переиспользуемая логика для эндпоинтов
 - DRF Serializers — вся валидация входных данных
-- Разделение приложений: **points**, **point_messages**
+- Разделение приложений: `points`, `point_messages`
 
 ---
 
 ## Примечания
-- Географическая точка хранится как Point(longitude, latitude)
-- Переопределён User model
+- Переопределён BaseUserModel
 - Настроенна админ-зона
