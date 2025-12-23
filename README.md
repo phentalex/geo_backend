@@ -193,7 +193,7 @@ POST `/api/points/messages/`
 Тело запроса:
 ```json
 {
-  "pointt_id": 1,
+  "point_id": 1,
   "text": "Отличное место!"
 }
 ```
