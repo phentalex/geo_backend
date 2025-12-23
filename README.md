@@ -1,13 +1,13 @@
 # Geo Backend — Django + GeoDjango
 
 Backend-приложение на Django для работы с географическими точками и сообщениями пользователей.  
-Предоставляет REST API для создания точек, сообщений и поиска контента в заданном радиусе от координат.
+Предоставляет REST API для создания гео-точек, сообщений и поиска контента в заданном радиусе от координат.
 
 ---
 
 ## Возможности
 
-- Создание гео-точек на карте  
+- Создание точек на карте  
 - Создание сообщений, привязанных к точкам  
 - Поиск точек в заданном радиусе  
 - Поиск сообщений в заданном радиусе
@@ -63,7 +63,7 @@ pip install -r requirements.txt
 #### 1. Установить PostgreSQL
 #### 2. Установить расширение PostGIS
 #### 3. Установить GDAL и GEOS (обязательно для GeoDjango)
-**Windows**
+### Windows
 1. Скачать установщик:
   *https://trac.osgeo.org/osgeo4w/*
 2. Запустить osgeo4w-setup-x86_64.exe
@@ -74,7 +74,12 @@ pip install -r requirements.txt
     - `geos`
 4. Дождаться окончания установки
 
-**для Linux / macOS**
+По умолчанию библиотеки будут установлены в:
+```sql
+C:\Users\<USER>\AppData\Local\Programs\OSGeo4W\bin\
+```
+
+### для Linux / macOS
 ```bash
 sudo apt install gdal-bin libgdal-dev libgeos-dev
 ```
@@ -83,11 +88,6 @@ sudo apt install gdal-bin libgdal-dev libgeos-dev
 brew install gdal geos
 ```
 В этих системах `GDAL_LIBRARY_PATH` и `GEOS_LIBRARY_PATH` обычно не требуются.
-
-По умолчанию библиотеки будут установлены в:
-```sql
-C:\Users\<USER>\AppData\Local\Programs\OSGeo4W\bin\
-```
 
 #### 4. Создать базу данных:
 
@@ -130,9 +130,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 ### После запуска сервер будет доступен по адресу:
-```bash
-http://127.0.0.1:8000/
-```
+**http://127.0.0.1:8000/**
 
 ---
 
