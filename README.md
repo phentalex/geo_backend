@@ -112,7 +112,7 @@ python manage.py runserver
 ### Все API-эндпоинты требуют авторизации.
 
 ### Для тестирования можно:
-- создать супер пользователя и зайти под ним в /admin/
+- создать супер пользователя и авторизоваться в /admin/ или Basic Auth(Postman)
   ```bash
   python manage.py createsuperuser
   ```
