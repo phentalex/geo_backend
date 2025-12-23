@@ -87,7 +87,7 @@ ALLOWED_HOSTS=127.0.0.1,localhost
 
 DB_NAME=geo_points_db
 DB_USER=postgres
-DB_PASSWORD=123123
+DB_PASSWORD=postgres
 DB_HOST=127.0.0.1
 DB_PORT=5432
 
