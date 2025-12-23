@@ -7,8 +7,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
-GDAL_LIBRARY_PATH = r'C:\Users\Alina\AppData\Local\Programs\OSGeo4W\bin\gdal312.dll'
-GEOS_LIBRARY_PATH = r'C:\Users\Alina\AppData\Local\Programs\OSGeo4W\bin\geos_c.dll'
+GDAL_LIBRARY_PATH = os.getenv('GDAL_LIBRARY_PATH')
+GEOS_LIBRARY_PATH = os.getenv('GEOS_LIBRARY_PATH')
+
+if not GDAL_LIBRARY_PATH or not GEOS_LIBRARY_PATH:
+    raise RuntimeError('GDAL/GEOS не указаны пути.')
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'unsafe-secret')
 
